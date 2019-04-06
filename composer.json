@@ -18,7 +18,7 @@
         "yiisoft/yii2": "~2.0.14",
         "yiisoft/yii2-bootstrap": "~2.0.0",
         "yiisoft/yii2-swiftmailer": "~2.0.0",
-        "darkdrim/yii2-simplehtmldom": "1.0",
+        "darkdrim/yii2-simplehtmldom": "^1.2",
         "keltstr/yii2-simplehtmldom": "dev-master"
     },
     "require-dev": {
