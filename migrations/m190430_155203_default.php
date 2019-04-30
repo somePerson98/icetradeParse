@@ -19,11 +19,11 @@ class m190430_155203_default extends Migration
             'auctions',
             ['key_word'],
             [
-                ['дорож'],
-                ['переезд'],
-                ['стрел'],
-                ['перевод'],
-                ['шпал']
+                ['dorozh'],
+                ['pereezd'],
+                ['strel'],
+                ['perevod'],
+                ['shpal']
             ]
         );
 
