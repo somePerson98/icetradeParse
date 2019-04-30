@@ -4,7 +4,6 @@ return [
     'class' => 'yii\db\Connection',
     'dsn' => 'mysql:host=localhost;dbname=icetrade',
     'username' => 'root',
-    'password' => 'p24v05d08r25',
     'password' => '',
     'charset' => 'utf8',
 
