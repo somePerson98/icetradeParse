@@ -87,11 +87,19 @@ class ParseController extends Controller
 //        exit();
 
         $keyWords = [
-            'http://www.icetrade.by/search/auctions?search_text=%D0%BC%D1%8F%D1%81%D0%BE&zakup_type[1]=1&zakup_type[2]=1&auc_num=&okrb=&company_title=&establishment=0&industries=&period=&created_from=&created_to=&request_end_from=&request_end_to=&t[Trade]=1&t[eTrade]=1&t[socialOrder]=1&t[singleSource]=1&t[Auction]=1&t[Request]=1&t[contractingTrades]=1&t[negotiations]=1&t[Other]=1&r[1]=1&r[2]=2&r[7]=7&r[3]=3&r[4]=4&r[6]=6&r[5]=5&sort=num%3Adesc&sbm=1&onPage=20&p=',
-            'http://www.icetrade.by/search/auctions?search_text=%D0%B1%D1%83%D0%BC%D0%B0%D0%B3%D0%B0&zakup_type[1]=1&zakup_type[2]=1&auc_num=&okrb=&company_title=&establishment=0&industries=&period=&created_from=&created_to=&request_end_from=&request_end_to=&t[Trade]=1&t[eTrade]=1&t[socialOrder]=1&t[singleSource]=1&t[Auction]=1&t[Request]=1&t[contractingTrades]=1&t[negotiations]=1&t[Other]=1&r[1]=1&r[2]=2&r[7]=7&r[3]=3&r[4]=4&r[6]=6&r[5]=5&sort=num%3Adesc&sbm=1&onPage=20&p=',
-            'http://www.icetrade.by/search/auctions?search_text=дерево&zakup_type[1]=1&zakup_type[2]=1&auc_num=&okrb=&company_title=&establishment=0&industries=&period=&created_from=&created_to=&request_end_from=&request_end_to=&t[Trade]=1&t[eTrade]=1&t[socialOrder]=1&t[singleSource]=1&t[Auction]=1&t[Request]=1&t[contractingTrades]=1&t[negotiations]=1&t[Other]=1&r[1]=1&r[2]=2&r[7]=7&r[3]=3&r[4]=4&r[6]=6&r[5]=5&sort=num%3Adesc&sbm=1&onPage=20&p='
+            'http://www.icetrade.by/search/auctions?search_text=%D0%B4%D0%BE%D1%80%D0%BE%D0%B6&zakup_type[1]=1&zakup_type[2]=1&auc_num=&okrb=&company_title=&establishment=0&industries=&period=&created_from=&created_to=&request_end_from=&request_end_to=&t[Trade]=1&t[eTrade]=1&t[socialOrder]=1&t[singleSource]=1&t[Auction]=1&t[Request]=1&t[contractingTrades]=1&t[negotiations]=1&t[Other]=1&r[1]=1&r[2]=2&r[7]=7&r[3]=3&r[4]=4&r[6]=6&r[5]=5&sort=num%3Adesc&sbm=1&onPage=20&p=',
+            'http://www.icetrade.by/search/auctions?search_text=%D0%BF%D0%B5%D1%80%D0%B5%D0%B5%D0%B7%D0%B4&zakup_type[1]=1&zakup_type[2]=1&auc_num=&okrb=&company_title=&establishment=0&industries=&period=&created_from=&created_to=&request_end_from=&request_end_to=&t[Trade]=1&t[eTrade]=1&t[socialOrder]=1&t[singleSource]=1&t[Auction]=1&t[Request]=1&t[contractingTrades]=1&t[negotiations]=1&t[Other]=1&r[1]=1&r[2]=2&r[7]=7&r[3]=3&r[4]=4&r[6]=6&r[5]=5&sort=num%3Adesc&sbm=1&onPage=20&p=',
+            'http://www.icetrade.by/search/auctions?search_text=%D1%81%D1%82%D1%80%D0%B5%D0%BB&zakup_type[1]=1&zakup_type[2]=1&auc_num=&okrb=&company_title=&establishment=0&industries=&period=&created_from=&created_to=&request_end_from=&request_end_to=&t[Trade]=1&t[eTrade]=1&t[socialOrder]=1&t[singleSource]=1&t[Auction]=1&t[Request]=1&t[contractingTrades]=1&t[negotiations]=1&t[Other]=1&r[1]=1&r[2]=2&r[7]=7&r[3]=3&r[4]=4&r[6]=6&r[5]=5&sort=num%3Adesc&sbm=1&onPage=20&p=',
+            'http://www.icetrade.by/search/auctions?search_text=%D0%BF%D0%B5%D1%80%D0%B5%D0%B2%D0%BE%D0%B4&zakup_type[1]=1&zakup_type[2]=1&auc_num=&okrb=&company_title=&establishment=0&industries=&period=&created_from=&created_to=&request_end_from=&request_end_to=&t[Trade]=1&t[eTrade]=1&t[socialOrder]=1&t[singleSource]=1&t[Auction]=1&t[Request]=1&t[contractingTrades]=1&t[negotiations]=1&t[Other]=1&r[1]=1&r[2]=2&r[7]=7&r[3]=3&r[4]=4&r[6]=6&r[5]=5&sort=num%3Adesc&sbm=1&onPage=20&p=',
+            'http://www.icetrade.by/search/auctions?search_text=%D1%88%D0%BF%D0%B0%D0%BB&zakup_type[1]=1&zakup_type[2]=1&auc_num=&okrb=&company_title=&establishment=0&industries=&period=&created_from=&created_to=&request_end_from=&request_end_to=&t[Trade]=1&t[eTrade]=1&t[socialOrder]=1&t[singleSource]=1&t[Auction]=1&t[Request]=1&t[contractingTrades]=1&t[negotiations]=1&t[Other]=1&r[1]=1&r[2]=2&r[7]=7&r[3]=3&r[4]=4&r[6]=6&r[5]=5&sort=num%3Adesc&sbm=1&onPage=20&p='
 
         ];
+
+//        $dataStr = $this->file_get_contents_curl($keyWords[1]);
+//        $data = SHD::str_get_html($dataStr);
+//
+//        $link = $data->find('div.paging')[0];
+//        var_dump($link);
 
 
         for ($i = 0;$i < count($keyWords);$i++){
@@ -100,11 +108,18 @@ class ParseController extends Controller
             $newNum = $data->find('table#auctions-list tr')[1]->find('td')[3]->innerText();
 
             $lastNum = $numbers[$i];
+//            echo $lastNum->number;
+//            exit();
 
-            $link = $data->find('div.paging')[0]->lastChild()->innerText();
+            $link = $data->find('div.paging')[0];
 
             if ($newNum != $lastNum->number) {
 
+                if ($link == null){
+                    $link = 0;
+                }else{
+                    $link = $link->lastChild()->innerText();
+                }
                 for ($j = 1; $j < (int)$link + 1; $j++) {
 
 
@@ -142,6 +157,7 @@ class ParseController extends Controller
                 }
 
             }
+
         }
 
         $this->sendMail(
