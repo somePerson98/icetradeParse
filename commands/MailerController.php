@@ -8,9 +8,9 @@
 
 namespace app\commands;
 
+
 use yii\console\Controller;
 use app\models\Auctions;
-use yii\console\ExitCode;
 use Yii;
 use darkdrim\simplehtmldom\SimpleHTMLDom as SHD;
 
@@ -57,21 +57,6 @@ class MailerController extends Controller
 //                        echo $element . '<br>' . '<br>';
 
                         array_push($auctions, $element);
-
-//                        if ($i == $link){
-//                            $this->sendMail(
-//                                'body_mail',
-//                                $auctions,
-//                                'd_rahatsevich@mail.ru',
-//                                'test.mailer.php@yandex.by'
-//                            );
-//
-//                            $lastNum->number = $newNum;
-//                            $lastNum->save();
-//
-//
-//                            die();
-//                        }
 
                     } else {
 
