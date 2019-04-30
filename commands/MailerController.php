@@ -37,6 +37,12 @@ class MailerController extends Controller
 
         ];
 
+//        $dataStr = $this->file_get_contents_curl($keyWords[1]);
+//        $data = SHD::str_get_html($dataStr);
+//
+//        $link = $data->find('div.paging')[0];
+//        var_dump($link);
+
 
         for ($i = 0;$i < count($keyWords);$i++){
             $dataStr = $this->file_get_contents_curl($keyWords[$i]);
@@ -44,11 +50,18 @@ class MailerController extends Controller
             $newNum = $data->find('table#auctions-list tr')[1]->find('td')[3]->innerText();
 
             $lastNum = $numbers[$i];
+//            echo $lastNum->number;
+//            exit();
 
-            $link = $data->find('div.paging')[0]->lastChild()->innerText();
+            $link = $data->find('div.paging')[0];
 
             if ($newNum != $lastNum->number) {
 
+                if ($link == null){
+                    $link = 0;
+                }else{
+                    $link = $link->lastChild()->innerText();
+                }
                 for ($j = 1; $j < (int)$link + 1; $j++) {
 
 
@@ -86,6 +99,7 @@ class MailerController extends Controller
                 }
 
             }
+
         }
 
         $this->sendMail(
