@@ -21,62 +21,80 @@ class MailerController extends Controller
 
     public function actionSend(){
 
-        $dataStr = $this->file_get_contents_curl("http://www.icetrade.by/search/auctions?search_text=%D0%BC%D1%8F%D1%81%D0%BE&zakup_type%5B1%5D=1&zakup_type%5B2%5D=1&auc_num=&okrb=&company_title=&establishment=0&industries=&period=&created_from=&created_to=&request_end_from=&request_end_to=&t%5BTrade%5D=1&t%5BeTrade%5D=1&t%5BsocialOrder%5D=1&t%5BsingleSource%5D=1&t%5BAuction%5D=1&t%5BRequest%5D=1&t%5BcontractingTrades%5D=1&t%5Bnegotiations%5D=1&t%5BOther%5D=1&r%5B1%5D=1&r%5B2%5D=2&r%5B7%5D=7&r%5B3%5D=3&r%5B4%5D=4&r%5B6%5D=6&r%5B5%5D=5&sort=num%3Adesc&sbm=1&onPage=20&p=1");
-
         $auctions = [];
 
+        $numbers = Auctions::find()->all();
+//        echo "<pre>";
+//        print_r($numbers[0]->number);
+//        exit();
+
+        $keyWords = [
+            'http://www.icetrade.by/search/auctions?search_text=%D0%BC%D1%8F%D1%81%D0%BE&zakup_type[1]=1&zakup_type[2]=1&auc_num=&okrb=&company_title=&establishment=0&industries=&period=&created_from=&created_to=&request_end_from=&request_end_to=&t[Trade]=1&t[eTrade]=1&t[socialOrder]=1&t[singleSource]=1&t[Auction]=1&t[Request]=1&t[contractingTrades]=1&t[negotiations]=1&t[Other]=1&r[1]=1&r[2]=2&r[7]=7&r[3]=3&r[4]=4&r[6]=6&r[5]=5&sort=num%3Adesc&sbm=1&onPage=20&p=',
+            'http://www.icetrade.by/search/auctions?search_text=%D0%B1%D1%83%D0%BC%D0%B0%D0%B3%D0%B0&zakup_type[1]=1&zakup_type[2]=1&auc_num=&okrb=&company_title=&establishment=0&industries=&period=&created_from=&created_to=&request_end_from=&request_end_to=&t[Trade]=1&t[eTrade]=1&t[socialOrder]=1&t[singleSource]=1&t[Auction]=1&t[Request]=1&t[contractingTrades]=1&t[negotiations]=1&t[Other]=1&r[1]=1&r[2]=2&r[7]=7&r[3]=3&r[4]=4&r[6]=6&r[5]=5&sort=num%3Adesc&sbm=1&onPage=20&p=',
+            'http://www.icetrade.by/search/auctions?search_text=дерево&zakup_type[1]=1&zakup_type[2]=1&auc_num=&okrb=&company_title=&establishment=0&industries=&period=&created_from=&created_to=&request_end_from=&request_end_to=&t[Trade]=1&t[eTrade]=1&t[socialOrder]=1&t[singleSource]=1&t[Auction]=1&t[Request]=1&t[contractingTrades]=1&t[negotiations]=1&t[Other]=1&r[1]=1&r[2]=2&r[7]=7&r[3]=3&r[4]=4&r[6]=6&r[5]=5&sort=num%3Adesc&sbm=1&onPage=20&p='
+
+        ];
+
+
+        for ($i = 0;$i < count($keyWords);$i++){
+            $dataStr = $this->file_get_contents_curl($keyWords[$i]);
+            $data = SHD::str_get_html($dataStr);
+            $newNum = $data->find('table#auctions-list tr')[1]->find('td')[3]->innerText();
+
+            $lastNum = $numbers[$i];
+
+            $link = $data->find('div.paging')[0]->lastChild()->innerText();
+
+            if ($newNum != $lastNum->number) {
+
+                for ($j = 1; $j < (int)$link + 1; $j++) {
 
 
 
-        $data = SHD::str_get_html($dataStr);
-
-        $lastNum = Auctions::findOne(['id' => 1]);
-
-        $newNum = $data->find('table#auctions-list tr')[1]->find('td')[3]->innerText();
-
-        $link = $data->find('div.paging')[0]->lastChild()->innerText();
-
-        if ($newNum != $lastNum->number) {
-            for ($i = 1; $i < (int)$link + 1; $i++) {
+                    $dataStr2 = $this->file_get_contents_curl($keyWords[$i].$j);
+                    $data2 = SHD::str_get_html($dataStr2);
 
 
+                    $count = 0;
+                    foreach ($data2->find('table#auctions-list tr') as $element) {
+
+                        if ($count == 0) {
+                            $count++;
+                            continue;
+                        }
+
+                        if ($element->find('td')[3]->innerText() != $lastNum->number) {
+//                            echo $element . '<br>' . '<br>';
+
+                            array_push($auctions, $element);
 
 
-                $dataStr2 = $this->file_get_contents_curl("http://www.icetrade.by/search/auctions?search_text=%D0%BC%D1%8F%D1%81%D0%BE&zakup_type%5B1%5D=1&zakup_type%5B2%5D=1&auc_num=&okrb=&company_title=&establishment=0&industries=&period=&created_from=&created_to=&request_end_from=&request_end_to=&t%5BTrade%5D=1&t%5BeTrade%5D=1&t%5BsocialOrder%5D=1&t%5BsingleSource%5D=1&t%5BAuction%5D=1&t%5BRequest%5D=1&t%5BcontractingTrades%5D=1&t%5Bnegotiations%5D=1&t%5BOther%5D=1&r%5B1%5D=1&r%5B2%5D=2&r%5B7%5D=7&r%5B3%5D=3&r%5B4%5D=4&r%5B6%5D=6&r%5B5%5D=5&sort=num%3Adesc&sbm=1&onPage=20&p=$i");
-                $data2 = SHD::str_get_html($dataStr2);
+                        } else {
 
-                $count = 0;
-                foreach ($data2->find('table#auctions-list tr') as $element) {
 
-                    if ($count == 0) {
-                        $count++;
-                        continue;
+                            $lastNum->number = $newNum;
+                            $lastNum->save();
+
+
+                            break;
+                        }
+
                     }
-
-                    if ($element->find('td')[3]->innerText() != $lastNum->number) {
-//                        echo $element . '<br>' . '<br>';
-
-                        array_push($auctions, $element);
-
-                    } else {
-
-                        $this->sendMail(
-                            'body_mail',
-                            $auctions,
-                            'd_rahatsevich@mail.ru',
-                            'test.mailer.php@yandex.by'
-                        );
-
-                        $lastNum->number = $newNum;
-                        $lastNum->save();
-                        die();
-                    }
+                    break;
                 }
 
             }
-
-            exit();
         }
+
+        $this->sendMail(
+            'body_mail',
+            $auctions,
+            'd_rahatsevich@mail.ru',
+            'test.mailer.php@yandex.by'
+        );
+
+        exit();
+
 
     }
 
