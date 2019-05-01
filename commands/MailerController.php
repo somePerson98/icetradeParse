@@ -49,8 +49,8 @@ class MailerController extends Controller
             $data = SHD::str_get_html($dataStr);
             $newNum = $data->find('table#auctions-list tr')[1]->find('td')[3]->innerText();
 
-            if(count($data->find('table#auctions-list tr')) < 3){
-                echo "less than three";
+            if(count($data->find('table#auctions-list tr')) >= 3){
+                $link = $data->find('div.paging')[0]->lastChild()->innerText();
             }
 
             $lastNum = $numbers[$i];
@@ -61,11 +61,6 @@ class MailerController extends Controller
 
             if ($newNum != $lastNum->number) {
 
-                if ($data->find('div.paging')[0] == null){
-                    $link = 0;
-                }else{
-                    $link = $data->find('div.paging')[0]->lastChild()->innerText();
-                }
                 for ($j = 1; $j < (int)$link + 1; $j++) {
 
 
