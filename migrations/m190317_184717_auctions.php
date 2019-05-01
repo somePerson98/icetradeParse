@@ -15,7 +15,7 @@ class m190317_184717_auctions extends Migration
 
         $this->createTable('auctions', [
             'id'=>$this->primaryKey()->notNull(),
-            'number'=>$this->string()->notNull()
+            'number'=>$this->string()->notNull()->defaultValue(0)
         ]);
 
     }
