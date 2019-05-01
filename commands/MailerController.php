@@ -49,6 +49,10 @@ class MailerController extends Controller
             $data = SHD::str_get_html($dataStr);
             $newNum = $data->find('table#auctions-list tr')[1]->find('td')[3]->innerText();
 
+            if(count($data->find('table#auctions-list tr')) < 3){
+                echo "less than three";
+            }
+
             $lastNum = $numbers[$i];
 //            echo $lastNum->number;
 //            exit();
