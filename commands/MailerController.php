@@ -53,14 +53,14 @@ class MailerController extends Controller
 //            echo $lastNum->number;
 //            exit();
 
-            $link = $data->find('div.paging')[0];
+
 
             if ($newNum != $lastNum->number) {
 
-                if ($link == null){
+                if ($data->find('div.paging')[0] == null){
                     $link = 0;
                 }else{
-                    $link = $link->lastChild()->innerText();
+                    $link = $data->find('div.paging')[0]->lastChild()->innerText();
                 }
                 for ($j = 1; $j < (int)$link + 1; $j++) {
 
