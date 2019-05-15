@@ -95,10 +95,6 @@ class MailerController extends Controller
         if (empty($mail)){
             exit('no new tenders!');
         }
-        if(isset($newNum)){
-            $auctions[$i]->number = $newNum;
-            $auctions[$i]->save();
-        }
 
         $this->sendMail(
             'body_mail',
