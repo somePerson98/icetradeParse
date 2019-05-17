@@ -1,12 +1,16 @@
-<?php
+<style>
 
-echo $data;
+    span.nw{
+        white-space: nowrap !important;
+        background-color: #0b2e13;
+    }
+</style>
+<table border="1" id="auctions" style="border-collapse: collapse">
+    <?php
 
-//foreach ($products as $product){?>
-<!---->
-<!--    <div class="item">-->
-<!--        --><?//= $product?>
-<!--    </div>-->
-<!---->
-<!---->
-<?//}
+    foreach ($params as $auction){?>
+
+            <tr><?= $auction?></tr>
+
+    <?php } ?>
+</table>

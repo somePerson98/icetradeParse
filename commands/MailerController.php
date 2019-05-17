@@ -78,15 +78,15 @@ class MailerController extends Controller
                         $auctions[$i]->save();
                         break;//прерывание перебора tr
                     }
-
-//                    echo $auctions[$i]->key_word . $element . '<br>' . '<br>';
-                    array_push($mail, $element .' '. $auctions[$i]->key_word);
+//                    echo $auctions[$i]->key_word. $element . '<br>' . '<br>';
+                    array_push($mail, '<td colspan="2">'.$auctions[$i]->key_word .'</td>' . $element);
 
 
                 }
                 if ($key==false){
                     break;//прерывание перехода на сл. стр. на тек. запросе
                 }
+
 
             endfor;//for2
 
@@ -95,13 +95,14 @@ class MailerController extends Controller
         if (empty($mail)){
             exit('no new tenders!');
         }
-
         $this->sendMail(
             'body_mail',
             $mail,
             'd_rahatsevich@mail.ru',
             'test.mailer.php@yandex.by'
         );
+
+//        return $this->render('index', ['params'=>$mail]);
 
         exit();
 

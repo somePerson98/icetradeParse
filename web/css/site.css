@@ -114,24 +114,4 @@ a.desc:after {
     outline: none;
 }
 
-.retina_redy{
-    width: 85px;
-    height: 120px;
-}
-
-.row{
-    display: flex;
-    justify-content: flex-start;
-    flex-wrap: wrap;
-    margin: 0 -15px;
-}
-
-.item{
-    float: left;
-    flex-basis: 200px;
-}
-
-.showInput{
-    display: block;
-}
 

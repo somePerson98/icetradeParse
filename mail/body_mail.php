@@ -1,12 +1,15 @@
-<?php
+<style>
 
-
+    span.nw{
+        white-space: nowrap !important;
+    }
+</style>
+<table border="1" id="auctions" style="border-collapse: collapse">
+    <?php
 
     foreach ($params as $auction){?>
 
-    <div class="item"> <?= $auction?>
+        <tr><?= $auction?></tr>
 
-    </div>
-
-
-<?php } ?>
+    <?php } ?>
+</table>

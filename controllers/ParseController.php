@@ -255,13 +255,12 @@ class ParseController extends Controller
 
                     if ($element->find('td')[3]->innerText() == $auctions[$i]->number){
                         $key = false;
-                        $auctions[$i]->number = $newNum;
-                        $auctions[$i]->save();
+//                        $auctions[$i]->number = $newNum;
+//                        $auctions[$i]->save();
                         break;//прерывание перебора tr
                     }
-
-//                    echo $auctions[$i]->key_word . $element . '<br>' . '<br>';
-                    array_push($mail, $element .' '. $auctions[$i]->key_word);
+//                    echo $auctions[$i]->key_word. $element . '<br>' . '<br>';
+                    array_push($mail, '<td colspan="2">'.$auctions[$i]->key_word .'</td>' . $element);
 
 
                 }
@@ -283,6 +282,8 @@ class ParseController extends Controller
             'd_rahatsevich@mail.ru',
             'test.mailer.php@yandex.by'
         );
+
+//        return $this->render('index', ['params'=>$mail]);
 
         exit();
 
