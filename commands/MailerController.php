@@ -79,7 +79,7 @@ class MailerController extends Controller
                         break;//прерывание перебора tr
                     }
 //                    echo $auctions[$i]->key_word. $element . '<br>' . '<br>';
-                    array_push($mail, '<td colspan="2">'.$auctions[$i]->key_word .'</td>' . $element);
+                    array_push($mail, '<td colspan="2" style="background-color: #8e8e8e">'.$auctions[$i]->key_word .'</td>' . $element);
 
 
                 }
