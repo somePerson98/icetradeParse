@@ -100,7 +100,7 @@ class MailerController extends Controller
             'body_mail',
             $mail,
             'd_rahatsevich@mail.ru',
-            'NWS_PTO@mail.ru'
+            'test.mailer.php@yandex.by'
         );
 
 //        return $this->render('index', ['params'=>$mail]);
