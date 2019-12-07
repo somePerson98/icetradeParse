@@ -50,7 +50,7 @@ class MailerController extends Controller
                 $p = $i+1;
                 $data = SHD::file_curl_get_html($url . '&onPage=' . self::SHOW_ITEMS . '&p=' . $p, 1, 5000);
                 $stop = false;
-                $items = $data->find("#auctions-list tr", 0);
+                $items = $data->find("#auctions-list tr");
 
                 foreach($data->find("#auctions-list tr") as $item) {
 
