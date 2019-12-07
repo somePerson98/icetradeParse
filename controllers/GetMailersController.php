@@ -9,7 +9,7 @@ class GetMailersController extends Controller
 {
     public static function getMailers()
     {
-        $params = require '/home/valia/www/others/parserIcetrade/config/params.php';
+        $params = require __DIR__ . '/../config/params.php';
         return $params['smtpMailers'];
     }
 }

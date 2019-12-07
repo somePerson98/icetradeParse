@@ -10,7 +10,7 @@ class KeyWordsController extends Controller
 {
     public static function getKeyWords()
     {
-        $params = require '/home/valia/www/others/parserIcetrade/config/params.php';
+        $params = require __DIR__ . '/../config/params.php';
         return $params['keyWords'];
     }
 }
