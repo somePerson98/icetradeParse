@@ -1,15 +1,21 @@
+<?php
+/** @var array $addition */
+/** @var array $auctions */
+$thead = $addition;
+?>
 <style>
 
-    span.nw{
-        white-space: nowrap !important;
-    }
+    /*span.nw{*/
+    /*    white-space: nowrap !important;*/
+    /*    background-color: #0b2e13;*/
+    /*}*/
 </style>
+
 <table border="1" id="auctions" style="border-collapse: collapse">
-    <?php
+    <thead><?=$thead?></thead>
+    <?php foreach ($auctions as $auction){?>
 
-    foreach ($params as $auction){?>
-
-        <tr><?= $auction?></tr>
+        <tr><?=$auction['item']?></tr>
 
     <?php } ?>
 </table>

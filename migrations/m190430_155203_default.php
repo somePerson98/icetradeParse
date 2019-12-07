@@ -15,18 +15,6 @@ class m190430_155203_default extends Migration
 
         $this->addColumn('auctions', 'key_word', 'VARCHAR(64) AFTER number');
 
-        $this->batchInsert(
-            'auctions',
-            ['key_word'],
-            [
-                ['dorozh'],
-                ['pereezd'],
-                ['strel'],
-                ['perevod'],
-                ['shpal']
-            ]
-        );
-
     }
 
     /**

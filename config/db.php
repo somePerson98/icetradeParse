@@ -4,7 +4,7 @@ return [
     'class' => 'yii\db\Connection',
     'dsn' => 'mysql:host=localhost;dbname=icetrade',
     'username' => 'root',
-    'password' => '',
+    'password' => 'p24v05d08r25',
     'charset' => 'utf8',
 
     // Schema cache options (for production environment)

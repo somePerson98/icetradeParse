@@ -10,7 +10,7 @@ use Yii;
  * This is the model class for table "auctions".
  *
  * @property int $id
- * @property string $number
+ * @property string $key_word
  */
 class Auctions extends \yii\db\ActiveRecord
 {
@@ -28,8 +28,8 @@ class Auctions extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['number'], 'required'],
             [['number'], 'string', 'max' => 255],
+            [['key_word'], 'string', 'max' => 255],
         ];
     }
 
@@ -40,7 +40,7 @@ class Auctions extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'number' => 'Number',
+            'a_number' => 'Number',
         ];
     }
 }

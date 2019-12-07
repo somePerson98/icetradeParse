@@ -114,4 +114,8 @@ a.desc:after {
     outline: none;
 }
 
+#auctions td {
+    padding: 10px;
+}
+
 

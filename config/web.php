@@ -7,6 +7,7 @@ $config = [
     'id' => 'basic',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
+    'defaultRoute' => 'parse/parse',
     'aliases' => [
         '@bower' => '@vendor/bower-asset',
         '@npm'   => '@vendor/npm-asset',
@@ -35,7 +36,7 @@ $config = [
                 'username' => 'd_rahatsevich@mail.ru',
                 'password' => 'testphpmailer367',
                 'port' => '465',
-                'encryption' => 'ssl',
+                'encryption' => 'tsl',
             ],
             // send all mails to a file by default. You have to set
             // 'useFileTransport' to false and configure a transport
