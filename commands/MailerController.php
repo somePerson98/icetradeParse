@@ -11,7 +11,6 @@ namespace app\commands;
 
 use app\controllers\GetMailersController;
 use app\controllers\KeyWordsController;
-use yii\base\Module;
 use yii\console\Controller;
 use app\models\Auctions;
 use Yii;
@@ -67,6 +66,8 @@ class MailerController extends Controller
                     if (! $this->hasNumber($keyWord, $number)){
                         array_push($this->auctionsToSend, ['key_word' => $keyWord, 'number' => $number, 'item' => $item]);
                         //если эл-т и стр последние - то добавить в массив (при условии, что ! $this->hasNumber)
+                        //то есть и в бд нет, и эл-т и стр последние (таким образом не надо вручную записывать
+                        // номер в бд. При отсутствии номера - он добавится сам)
                         if ($this->isLastTrAndLastPage($items, $item, $pageCount, $i)) {
                             $this->setNumber($keyWord);
                         }
@@ -80,10 +81,6 @@ class MailerController extends Controller
                 if ($stop) break;
             }
         }
-//        return $this->render('index', ['parsed' => $this->auctionsToSend, 'thead' => $thead]);
-//        if (! empty($this->auctionsToSend))
-//            $this->sendMail('body_mail', $this->auctionsToSend, $thead);
-//        else echo "no new tenders";
         return ['auctionsToSend' => $this->auctionsToSend, 'thead' => $thead];
     }
 
@@ -140,8 +137,6 @@ class MailerController extends Controller
             ->setFrom("$from")
             ->setTo("$to")
             ->setSubject('Тема сообщения')
-//            ->setTextBody('Текст сообщения')
-//            ->setHtmlBody('<b>qweтекст сообщения в формате HTML</b>')
             ->send();
 
         return var_dump($result);
