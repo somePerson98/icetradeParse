@@ -15,7 +15,7 @@ $thead = $addition;
     <thead><?=$thead?></thead>
     <?php foreach ($auctions as $auction){?>
 
-        <tr><?=$auction['item']?></tr>
+        <tr><?="<td>" . $auction['key_word'] ."</td> ". $auction['item']?></tr>
 
     <?php } ?>
 </table>
