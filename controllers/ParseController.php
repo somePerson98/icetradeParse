@@ -133,7 +133,7 @@ class ParseController extends Controller
             }
             for ($i = 0; $i < $pageCount; $i++) {
                 $p = $i+1;
-                $data = SHD::file_curl_get_html($url . '&onPage=' . MailerController::SHOW_ITEMS . '&p=' . $p, 1, 5000);
+                $data = SHD::file_curl_get_html($url . '&p=' . $p, 1, 5000);
                 $stop = false;
                 $items = $data->find("#auctions-list tr");
 
@@ -168,8 +168,8 @@ class ParseController extends Controller
     }
 
     protected function getPageCount($url) {
-        $data = SHD::file_curl_get_html($url, 1, 2000);
-        $totalStr = $data->find('.total')[0]->innerText();
+        $data = SHD::file_curl_get_html($url, 1, 5000);
+        $totalStr = $data->find('.total') ? $data->find('.total')[0]->innerText() : false;
         if (! $totalStr) return false;
         $total = preg_replace("/[^,.0-9]/", '', $totalStr);
         if((int) $total == 0)
