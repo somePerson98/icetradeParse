@@ -10,7 +10,8 @@ return [
         'shpal' => '%D1%88%D0%BF%D0%B0%D0%BB',
     ],
     'smtpMailers' => [
-        'to' => array('test.mailer.php@yandex.by','p.rahatsevich75@gmail.com'),
+       // 'to' => array('test.mailer.php@yandex.by','p.rahatsevich75@gmail.com'),
+'to' => array('test.mailer.php@yandex.by'),
         'from' => 'd_rahatsevich@mail.ru'
     ]
 ];
