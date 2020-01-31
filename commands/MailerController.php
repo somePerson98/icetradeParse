@@ -135,8 +135,8 @@ class MailerController extends Controller
         $to = GetMailersController::getMailers()['to'];
         $result = Yii::$app->mailer->compose("$body_mail", ['auctions' => $auctions, 'addition' => $addition])
             ->setFrom("$from")
-            ->setTo(array($to[0], $to[1]))
-            ->setSubject('Тема сообщения')
+            ->setTo(array($to[0], $to[1], $to[2]))
+            ->setSubject('Новые тендеры')
             ->send();
 
         return var_dump($result);
