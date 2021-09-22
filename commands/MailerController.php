@@ -14,7 +14,7 @@ use app\controllers\KeyWordsController;
 use yii\console\Controller;
 use app\models\Auctions;
 use Yii;
-use app\components\simplehtmldom\SimpleHTMLDom as SHD;
+use serhatozles/yii2-simplehtmldom/SimpleHTMLDom as SHD;
 
 
 
