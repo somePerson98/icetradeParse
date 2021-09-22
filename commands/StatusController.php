@@ -18,7 +18,7 @@ class StatusController extends Controller
     public function actionStatus(){
 
         echo 'status';
-        echo '<br>';
+        echo '<br/>';
 
         die();
     }
