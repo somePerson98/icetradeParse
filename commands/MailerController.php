@@ -14,7 +14,7 @@ use app\controllers\KeyWordsController;
 use yii\console\Controller;
 use app\models\Auctions;
 use Yii;
-use yii\serhatozles\yii2-simplehtmldom\SimpleHTMLDom as SHD;
+use yii\serhatozles\yii2-simplehtmldom\SimpleHTMLDom;
 
 
 
@@ -48,7 +48,6 @@ class MailerController extends Controller
             }
             for ($i = 0; $i < $pageCount; $i++) {
                 $p = $i+1;
-                $data = SHD::file_curl_get_html($url . '&p=' . $p, 1, 5000);
                 $stop = false;
                 $items = $data->find("#auctions-list tr");
 
@@ -85,7 +84,7 @@ class MailerController extends Controller
     }
 
     protected function getPageCount($url) {
-        $data = SHD::file_curl_get_html($url, 1, 5000);
+        $data = SimpleHTMLDom::file_curl_get_html($url, 1, 5000);
         $totalStr = $data->find('.total') ? $data->find('.total')[0]->innerText() : false;
         if (! $totalStr) return false;
         $total = preg_replace("/[^,.0-9]/", '', $totalStr);
