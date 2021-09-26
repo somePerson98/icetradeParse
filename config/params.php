@@ -3,7 +3,12 @@
 return [
     'adminEmail' => 'admin@example.com',
     'keyWords'=> [
+        'dorozhn' => '%D0%B4%D0%BE%D1%80%D0%BE%D0%B6%D0%BD',
+        'dorog' => '%D0%B4%D0%BE%D1%80%D0%BE%D0%B3',
+        'pod^ezdn' => '%D0%BF%D0%BE%D0%B4%D1%8A%D0%B5%D0%B7%D0%B4%D0%BD',
         'pereezd' => '%D0%BF%D0%B5%D1%80%D0%B5%D0%B5%D0%B7%D0%B4',
+        'perevod' => '%D0%BF%D0%B5%D1%80%D0%B5%D0%B2%D0%BE%D0%B4',
+        'rels' => '%D1%80%D0%B5%D0%BB%D1%8C%D1%81',
         'zheleznodorozh' => '%D0%B6%D0%B5%D0%BB%D0%B5%D0%B7%D0%BD%D0%BE%D0%B4%D0%BE%D1%80%D0%BE%D0%B6',
         'put' => '%D0%BF%D1%83%D1%82',
         'podkran' => '%D0%BF%D0%BE%D0%B4%D0%BA%D1%80%D0%B0%D0%BD',
