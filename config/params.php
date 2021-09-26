@@ -15,8 +15,8 @@ return [
         'shpal' => '%D1%88%D0%BF%D0%B0%D0%BB',
     ],
     'smtpMailers' => [
-        //'to' => array('test.mailer.php@yandex.by','p.rahatsevich75@gmail.com', 'gryn66.66@mail.ru', 'NWS_2013@mail.ru'),
-'to' => array('dasha.pavlovna2014@yandex.ru'),
+        'to' => array('dasha.pavlovna2014@yandex.ru','p.rahatsevich75@gmail.com', 'gryn66.66@mail.ru', 'NWS_2013@mail.ru'),
+        // 'to' => array('dasha.pavlovna2014@yandex.ru'),
         'from' => 'icetrade.parse@gmail.com'
     ]
 ];
