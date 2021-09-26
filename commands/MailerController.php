@@ -14,7 +14,7 @@ use app\controllers\KeyWordsController;
 use yii\console\Controller;
 use app\models\Auctions;
 use Yii;
-use app\components\SimpleHTMLdom\SimpleHTMLDom;
+use app\components\simplehtmldom\SimpleHTMLDom;
 
 class MailerController extends Controller
 {
