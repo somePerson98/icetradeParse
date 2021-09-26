@@ -18,7 +18,7 @@ use app\components\simplehtmldom\SimpleHTMLDom;
 
 class MailerController extends Controller
 {
-    const SHOW_ITEMS = 100;
+    const SHOW_ITEMS = 20;
     public $auctions;
     public $auctionsToSend;
     public $lastNumber;
@@ -50,14 +50,12 @@ class MailerController extends Controller
         foreach ($keyWords as $keyWord => $encodedWord) {
             $baseUrl = "http://www.icetrade.by/search/auctions?search_text=$encodedWord&zakup_type%5B1%5D=1&zakup_type%5B2%5D=1&auc_num=&okrb=&company_title=&establishment=0&industries=&period=&created_from=&created_to=&request_end_from=&request_end_to=&t%5BTrade%5D=1&t%5BeTrade%5D=1&t%5BsocialOrder%5D=1&t%5BsingleSource%5D=1&t%5BAuction%5D=1&t%5BRequest%5D=1&t%5BcontractingTrades%5D=1&t%5Bnegotiations%5D=1&t%5BOther%5D=1&r%5B1%5D=1&r%5B2%5D=2&r%5B7%5D=7&r%5B3%5D=3&r%5B4%5D=4&r%5B6%5D=6&r%5B5%5D=5&sort=num%3Adesc&sbm=1&p=1&onPage=" . self::SHOW_ITEMS;
             $pageCount = self::getPageCount($baseUrl);
-            var_dump($pageCount);
+
             if (! $pageCount) {
                 continue;
             }
             for ($i = 0; $i < $pageCount; $i++) {
                 $p = $i+1;
-                $currentUrl = "http://www.icetrade.by/search/auctions?search_text=$encodedWord&zakup_type%5B1%5D=1&zakup_type%5B2%5D=1&auc_num=&okrb=&company_title=&establishment=0&industries=&period=&created_from=&created_to=&request_end_from=&request_end_to=&t%5BTrade%5D=1&t%5BeTrade%5D=1&t%5BsocialOrder%5D=1&t%5BsingleSource%5D=1&t%5BAuction%5D=1&t%5BRequest%5D=1&t%5BcontractingTrades%5D=1&t%5Bnegotiations%5D=1&t%5BOther%5D=1&r%5B1%5D=1&r%5B2%5D=2&r%5B7%5D=7&r%5B3%5D=3&r%5B4%5D=4&r%5B6%5D=6&r%5B5%5D=5&sort=num%3Adesc&sbm=1&p=$p&onPage=" . self::SHOW_ITEMS;
-                $data = SimpleHTMLDom::file_curl_get_html($currentUrl, 1, 5000);
                 $currentUrl = "http://www.icetrade.by/search/auctions?search_text=$encodedWord&zakup_type%5B1%5D=1&zakup_type%5B2%5D=1&auc_num=&okrb=&company_title=&establishment=0&industries=&period=&created_from=&created_to=&request_end_from=&request_end_to=&t%5BTrade%5D=1&t%5BeTrade%5D=1&t%5BsocialOrder%5D=1&t%5BsingleSource%5D=1&t%5BAuction%5D=1&t%5BRequest%5D=1&t%5BcontractingTrades%5D=1&t%5Bnegotiations%5D=1&t%5BOther%5D=1&r%5B1%5D=1&r%5B2%5D=2&r%5B7%5D=7&r%5B3%5D=3&r%5B4%5D=4&r%5B6%5D=6&r%5B5%5D=5&sort=num%3Adesc&sbm=1&p=$p&onPage=" . self::SHOW_ITEMS;
                 $data = SimpleHTMLDom::file_curl_get_html($currentUrl, 1, 5000);
                 $stop = false;
@@ -100,10 +98,13 @@ class MailerController extends Controller
         $totalStr = $data->find('.total') ? $data->find('.total')[0]->innerText() : false;
         if (! $totalStr) return false;
         $total = preg_replace("/[^,.0-9]/", '', $totalStr);
-        var_dump($total);
-        if((int) $total == 0)
+
+        if((int) $total == 0) {
             return false;
-        $pageCount = (int) $total / self::SHOW_ITEMS <= 1 ? 1 : ceil((int) $this->total / self::SHOW_ITEMS); //округление в большую сторону
+        }
+
+        $pageCount = (int) $total / self::SHOW_ITEMS <= 1 ? 1 : ceil((int) $total / self::SHOW_ITEMS); //округление в большую сторону
+
         return $pageCount;
     }
 

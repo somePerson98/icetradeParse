@@ -14,7 +14,7 @@ use Yii;
 use yii\base\Theme;
 use yii\web\Controller;
 use app\models\Auctions;
-use app\components\simplehtmldom\SimpleHTMLDom as SHD;
+use app\components\simplehtmldom\SimpleHTMLDom;
 use app\controllers\KeyWordsController;
 
 
@@ -211,5 +211,18 @@ class ParseController extends Controller
             return true;
         }
         return false;
+    }
+
+    public function actionTest () {
+        $data = SimpleHTMLDom::file_curl_get_html("http://www.icetrade.by/search/auctions?search_text=%D0%B4%D0%BE%D1%80%D0%BE%D0%B6%D0%BD&zakup_type%5B1%5D=1&zakup_type%5B2%5D=1&auc_num=&okrb=&company_title=&establishment=0&industries=&period=&created_from=&created_to=&request_end_from=&request_end_to=&t%5BTrade%5D=1&t%5BeTrade%5D=1&t%5BsocialOrder%5D=1&t%5BsingleSource%5D=1&t%5BAuction%5D=1&t%5BRequest%5D=1&t%5BcontractingTrades%5D=1&t%5Bnegotiations%5D=1&t%5BOther%5D=1&r%5B1%5D=1&r%5B2%5D=2&r%5B7%5D=7&r%5B3%5D=3&r%5B4%5D=4&r%5B6%5D=6&r%5B5%5D=5&sort=num%3Adesc&sbm=1&p=1&onPage=20", 1, 5000);
+        $totalStr = $data->find('.total') ? $data->find('.total')[0]->innerText() : false;
+        if (! $totalStr) return false;
+        $total = preg_replace("/[^,.0-9]/", '', $totalStr);
+        if((int) $total == 0) {
+            return false;
+        }
+        $pageCount = (int) $total / 20 <= 1 ? 1 : ceil((int) $total / 20); //округление в большую сторону
+        var_dump($pageCount);
+        return $this->render('test', ['data' => $data]);
     }
 }
