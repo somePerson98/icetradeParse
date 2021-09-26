@@ -32,9 +32,6 @@ tests/_support/_generated
 #vagrant folder
 /.vagrant
 
-<<<<<<< HEAD
 #config db.php
-config/db.php
-=======
-/config/
->>>>>>> cc8432f27352c45a9ba0d5bb82b01595e1c0f3a3
+/config/db.php
+/config/db.php

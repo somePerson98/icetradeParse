@@ -10,21 +10,21 @@
  * при помощи cURL'a, например:
  
  
-	$data = \darkdrim\simplehtmldom\SimpleHTMLDom::file_curl_get_html('http://google.ru');
-	if(count($data->find('a'))){
-		foreach($data->find('a') as $a){
-			echo 'new [a href]: ' . $a->href . '<br />';
-		}
-	}
-	$data->clear();
-	unset($data);
+*$data = \darkdrim\simplehtmldom\SimpleHTMLDom::file_curl_get_html('http://google.ru');
+*	if(count($data->find('a'))){
+*		foreach($data->find('a') as $a){
+*			echo 'new [a href]: ' . $a->href . '<br />';
+*		}
+*	}
+*	$data->clear();
+*	unset($data);
 	
 	
  * 15.05.2015
  *
 **/
 
-namespace app\components\simplehtmldom;
+namespace app\components\SimpleHTMLdom;
 
 define('HDOM_TYPE_ELEMENT', 1);
 define('HDOM_TYPE_COMMENT', 2);
@@ -46,7 +46,7 @@ define('HDOM_INFO_ENDSPACE', 7);
 define('DEFAULT_TARGET_CHARSET', 'UTF-8');
 define('DEFAULT_BR_TEXT', "\r\n");
 define('DEFAULT_SPAN_TEXT', " ");
-define('MAX_FILE_SIZE', 600000);
+define('MAX_FILE_SIZE', 6000000);
 
 class SimpleHTMLDom extends \yii\helpers\Inflector
 {
@@ -64,6 +64,7 @@ class SimpleHTMLDom extends \yii\helpers\Inflector
 		// $maxlen is defined in the code as PHP_STREAM_COPY_ALL which is defined as -1.
 		// Внимание! Этот метод использует функцию file_get_contents() вместо cURL!
 		// 15.05.2015 исправил: при получении кода ответа 404 метод возвращает FALSE вместо строки "error" (!)
+		// Также добавил очистку парсинга ($dom->clear()) в случае ошибки
 		// Также добавил очистку парсинга ($dom->clear()) в случае ошибки
 	public static function file_get_html($url, $use_include_path = false, $context = null, $offset = -1, $maxLen = -1, $lowercase = true, $forceTagsClosed = true, $target_charset = DEFAULT_TARGET_CHARSET, $stripRN = true, $defaultBRText = DEFAULT_BR_TEXT, $defaultSpanText = DEFAULT_SPAN_TEXT) 
 	{
@@ -695,7 +696,7 @@ if (is_object($debug_object)) {
 // This implies that an html attribute specifier may start with an @ sign that is NOT captured by the expression.
 // farther study is required to determine of this should be documented or removed.
 //		$pattern = "/([\w-:\*]*)(?:\#([\w-]+)|\.([\w-]+))?(?:\[@?(!?[\w-]+)(?:([!*^$]?=)[\"']?(.*?)[\"']?)?\])?([\/, ]+)/is";
-$pattern = "/([\w\-:\*]*)(?:\#([\w\-]+)|\.([\w\-]+))?(?:\[@?(!?[\w\-:]+)(?:([!*^$]?=)[\"']?(.*?)[\"']?)?\])?([\/, ]+)/is";
+$pattern = "/([\w-:\*]*)(?:\#([\w-]+)|\.([\w-]+))?(?:\[@?(!?[\w-:]+)(?:([!*^$]?=)[\"']?(.*?)[\"']?)?\])?([\/, ]+)/is";
 preg_match_all($pattern, trim($selector_string) . ' ', $matches, PREG_SET_ORDER);
 if (is_object($debug_object)) {
 	$debug_object->debugLog(2, "Matches Array: ", $matches);
@@ -1429,7 +1430,7 @@ class simple_html_dom {
 		return true;
 	}
 
-	if (!preg_match("/^[\w\-:]+$/", $tag)) {
+	if (!preg_match("/^[\w-:]+$/", $tag)) {
 		$node->_[HDOM_INFO_TEXT] = '<' . $tag . $this->copy_until('<>');
 		if ($this->char === '<') {
 			$this->link_nodes($node, false);

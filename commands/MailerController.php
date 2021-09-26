@@ -14,9 +14,7 @@ use app\controllers\KeyWordsController;
 use yii\console\Controller;
 use app\models\Auctions;
 use Yii;
-use yii\serhatozles\yii2-simplehtmldom\SimpleHTMLDom;
-
-
+use app\components\SimpleHTMLdom\SimpleHTMLDom;
 
 class MailerController extends Controller
 {
@@ -33,6 +31,15 @@ class MailerController extends Controller
         else echo "no new tenders";
     }
 
+    public function actionTest() {
+        $m = Yii::$app->mailer->compose()
+            ->setFrom('icetrade.parse@gmail.com')
+            ->setTo('dasha.r.00@inbox.ru')
+            ->setSubject('Email sent from Yii2-Swiftmailer')
+            ->setTextBody("Some Test data from someone.")
+            ->send();
+    }
+
     public function actionParse()
     {
         $keyWords = KeyWordsController::getKeyWords();
@@ -42,6 +49,7 @@ class MailerController extends Controller
         $thead = '';
         foreach ($keyWords as $keyWord => $encodedWord) {
             $url = "http://www.icetrade.by/search/auctions?search_text=$encodedWord&zakup_type%5B1%5D=1&zakup_type%5B2%5D=1&auc_num=&okrb=&company_title=&establishment=0&industries=&period=&created_from=&created_to=&request_end_from=&request_end_to=&t%5BTrade%5D=1&t%5BeTrade%5D=1&t%5BsocialOrder%5D=1&t%5BsingleSource%5D=1&t%5BAuction%5D=1&t%5BRequest%5D=1&t%5BcontractingTrades%5D=1&t%5Bnegotiations%5D=1&t%5BOther%5D=1&r%5B1%5D=1&r%5B2%5D=2&r%5B7%5D=7&r%5B3%5D=3&r%5B4%5D=4&r%5B6%5D=6&r%5B5%5D=5&sort=num%3Adesc&sbm=1";
+            $data = SimpleHTMLDom::file_curl_get_html($url, 1, 5000);
             $pageCount = self::getPageCount($url);
             if (! $pageCount) {
                 continue;
@@ -134,7 +142,7 @@ class MailerController extends Controller
         $to = GetMailersController::getMailers()['to'];
         $result = Yii::$app->mailer->compose("$body_mail", ['auctions' => $auctions, 'addition' => $addition])
             ->setFrom("$from")
-            ->setTo(array($to[0], $to[1], $to[2], $to[3]))
+            ->setTo(array($to[0]))
             ->setSubject('Новые тендеры')
             ->send();
 

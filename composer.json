@@ -17,10 +17,10 @@
         "php": ">=5.4.0",
         "yiisoft/yii2": "~2.0.14",
         "yiisoft/yii2-bootstrap": "~2.0.0",
-        "yiisoft/yii2-swiftmailer": "~2.0.0",
         "serhatozles/yii2-simplehtmldom": "dev-master",
         "keltstr/yii2-simplehtmldom": "dev-master",
-        "ext-curl": "*"
+        "ext-curl": "*",
+        "yiisoft/yii2-swiftmailer": "*"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.0.0",

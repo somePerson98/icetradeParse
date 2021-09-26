@@ -29,18 +29,14 @@ $config = [
         'db' => $db,
         'mailer' => [
             'class' => 'yii\swiftmailer\Mailer',
-            'useFileTransport' => false,
             'transport' => [
                 'class' => 'Swift_SmtpTransport',
-                'host' => 'smtp.mail.ru',
-                'username' => 'd_rahatsevich@mail.ru',
-                'password' => 'testphpmailer367',
-                'port' => '465',
-                'encryption' => 'ssl',
+                'host' => 'smtp.gmail.com',
+                'username' => 'icetrade.parse@gmail.com',
+                'password' => 'icetradeparse.98',
+                'port' => '587',
+                'encryption' => 'tls',
             ],
-            // send all mails to a file by default. You have to set
-            // 'useFileTransport' to false and configure a transport
-            // for the mailer to send real emails.
         ],
     ],
     'params' => $params,

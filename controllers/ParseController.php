@@ -78,7 +78,7 @@ class ParseController extends Controller
             ->setFrom('d_rahatsevich@mail.ru')
             ->setTo('test.mailer.php@yandex.by')
             ->setSubject('Тема сообщения')
-            ->setTextBody('Текст сообщенияassadasdasds')
+            ->setTextBody('Текст сообщения')
             ->setHtmlBody('<b>текст сообщения в формате HTML</b>')
             ->send();
 
