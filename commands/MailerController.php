@@ -99,6 +99,7 @@ class MailerController extends Controller
         $data = SimpleHTMLDom::file_curl_get_html($url, 1, 5000);
         $totalStr = $data->find('.total') ? $data->find('.total')[0]->innerText() : false;
         echo $data->find('.total')[0]->innerText();
+        echo $url;
         if (! $totalStr) return false;
         $total = preg_replace("/[^,.0-9]/", '', $totalStr);
 
