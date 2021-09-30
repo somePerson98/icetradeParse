@@ -52,7 +52,7 @@ class MailerController extends Controller
             $pageCount = self::getPageCount($baseUrl);
 
             if (! $pageCount) {
-                echo "Continue";
+                //echo "Continue";
                 continue;
             }
             for ($i = 0; $i < $pageCount; $i++) {
