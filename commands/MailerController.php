@@ -70,7 +70,7 @@ class MailerController extends Controller
                     }
                     $number = $item->find('td')[3]->innerText();
                     $this->lastNumber = $this->lastNumber == null ? $number : $this->lastNumber;
-
+                    var_dump($number);
                     //если номера в бд нет - продолжаем заполнять массив
                     if (! $this->hasNumber($keyWord, $number)){
                         array_push($this->auctionsToSend, ['key_word' => $keyWord, 'number' => $number, 'item' => $item]);
