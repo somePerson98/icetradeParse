@@ -101,9 +101,9 @@ class MailerController extends Controller
         $totalStr = $data->find('.total') ? $data->find('.total')[0]->innerText() : false;
 //         echo $data->find('.total')[0];
 //         echo $data->find('.total')[0]->innerText();
+        echo 111;
         if (! $totalStr) return false;
         $total = preg_replace("/[^,.0-9]/", '', $totalStr);
-        echo 111;
         if((int) $total == 0) {
             return false;
         }
