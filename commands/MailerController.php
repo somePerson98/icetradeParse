@@ -107,7 +107,7 @@ class MailerController extends Controller
         if((int) $total == 0) {
             return false;
         }
-
+        
         $pageCount = (int) $total / self::SHOW_ITEMS <= 1 ? 1 : ceil((int) $total / self::SHOW_ITEMS); //округление в большую сторону
         echo $pageCount;
         return $pageCount;
