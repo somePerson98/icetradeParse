@@ -171,18 +171,12 @@ class ParseController extends Controller
     protected function getPageCount($url) {
         $data = SimpleHTMLDom::file_curl_get_html($url, 1, 5000);
         $totalStr = $data->find('.total') ? $data->find('.total')[0]->innerText() : false;
-        echo $data->find('.total')[0]->innerText();
-        if (! $totalStr) {
-            return false;
-        }
         $total = preg_replace("/[^,.0-9]/", '', $totalStr);
 
         if((int) $total == 0) {
             return false;
         }
 
-        $pageCount = (int) $total / MailerController::SHOW_ITEMS <= 1 ? 1 : ceil((int) $total / MailerController::SHOW_ITEMS); //округление в большую сторону
-        // echo $pageCount;
         return $pageCount;
     }
 
