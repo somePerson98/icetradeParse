@@ -128,42 +128,42 @@ class ParseController extends Controller
         foreach ($keyWords as $keyWord => $encodedWord) {
             $url = "http://www.icetrade.by/search/auctions?search_text=$encodedWord&zakup_type%5B1%5D=1&zakup_type%5B2%5D=1&auc_num=&okrb=&company_title=&establishment=0&industries=&period=&created_from=&created_to=&request_end_from=&request_end_to=&t%5BTrade%5D=1&t%5BeTrade%5D=1&t%5BsocialOrder%5D=1&t%5BsingleSource%5D=1&t%5BAuction%5D=1&t%5BRequest%5D=1&t%5BcontractingTrades%5D=1&t%5Bnegotiations%5D=1&t%5BOther%5D=1&r%5B1%5D=1&r%5B2%5D=2&r%5B7%5D=7&r%5B3%5D=3&r%5B4%5D=4&r%5B6%5D=6&r%5B5%5D=5&sort=num%3Adesc&sbm=1";
             $pageCount = self::getPageCount($url . '&onPage=' . MailerController::SHOW_ITEMS);
-            // continue;
-            // if (! $pageCount) {
-            //     continue;
-            // }
-            // for ($i = 0; $i < $pageCount; $i++) {
-            //     $p = $i+1;
-            //     $data = SHD::file_curl_get_html($url . '&p=' . $p, 1, 5000);
-            //     $stop = false;
-            //     $items = $data->find("#auctions-list tr");
+            continue;
+            if (! $pageCount) {
+                continue;
+            }
+            for ($i = 0; $i < $pageCount; $i++) {
+                $p = $i+1;
+                $data = SHD::file_curl_get_html($url . '&p=' . $p, 1, 5000);
+                $stop = false;
+                $items = $data->find("#auctions-list tr");
 
-            //     foreach($data->find("#auctions-list tr") as $item) {
+                foreach($data->find("#auctions-list tr") as $item) {
 
-            //         //пропуск thead
-            //         if ($item->find('th')){
-            //             $thead = $item;
-            //             continue;
-            //         }
-            //         $number = $item->find('td')[3]->innerText();
-            //         $this->lastNumber = $this->lastNumber == null ? $number : $this->lastNumber;
+                    //пропуск thead
+                    if ($item->find('th')){
+                        $thead = $item;
+                        continue;
+                    }
+                    $number = $item->find('td')[3]->innerText();
+                    $this->lastNumber = $this->lastNumber == null ? $number : $this->lastNumber;
 
-            //         //если номера в бд нет - продолжаем заполнять массив
-            //         if (! $this->hasNumber($keyWord, $number)){
-            //             array_push($this->auctionsToSend, ['key_word' => $keyWord, 'number' => $number, 'item' => $item]);
-            //             //если эл-т и стр последние - то добавить в массив (при условии, что ! $this->hasNumber)
-            //             if ($this->isLastTrAndLastPage($items, $item, $pageCount, $i)) {
-            //                 $this->setNumber($keyWord);
-            //             }
-            //             continue;
-            //         }else {
-            //             $this->setNumber($keyWord);
-            //             $stop = true;
-            //             break;
-            //         }
-            //     }
-            //     if ($stop) break;
-            // }
+                    //если номера в бд нет - продолжаем заполнять массив
+                    if (! $this->hasNumber($keyWord, $number)){
+                        array_push($this->auctionsToSend, ['key_word' => $keyWord, 'number' => $number, 'item' => $item]);
+                        //если эл-т и стр последние - то добавить в массив (при условии, что ! $this->hasNumber)
+                        if ($this->isLastTrAndLastPage($items, $item, $pageCount, $i)) {
+                            $this->setNumber($keyWord);
+                        }
+                        continue;
+                    }else {
+                        $this->setNumber($keyWord);
+                        $stop = true;
+                        break;
+                    }
+                }
+                if ($stop) break;
+            }
         }
         return $this->render('index', ['parsed' => $this->auctionsToSend, 'thead' => $thead]);
     }
@@ -215,7 +215,7 @@ class ParseController extends Controller
     }
 
     public function actionTest () {
-        $data = SimpleHTMLDom::file_curl_get_html("http://www.icetrade.by/search/auctions?search_text=%D0%B4%D0%BE%D1%80%D0%BE%D0%B6%D0%BD&zakup_type%5B1%5D=1&zakup_type%5B2%5D=1&auc_num=&okrb=&company_title=&establishment=0&industries=&period=&created_from=&created_to=&request_end_from=&request_end_to=&t%5BTrade%5D=1&t%5BeTrade%5D=1&t%5BsocialOrder%5D=1&t%5BsingleSource%5D=1&t%5BAuction%5D=1&t%5BRequest%5D=1&t%5BcontractingTrades%5D=1&t%5Bnegotiations%5D=1&t%5BOther%5D=1&r%5B1%5D=1&r%5B2%5D=2&r%5B7%5D=7&r%5B3%5D=3&r%5B4%5D=4&r%5B6%5D=6&r%5B5%5D=5&sort=num%3Adesc&sbm=1&p=1&onPage=20", 1, 5000);
+        $data = SimpleHTMLDom::file_curl_get_html("https://icetrade.by/search/auctions?search_text=%D0%BB%D0%B5%D1%81&zakup_type%5B1%5D=1&zakup_type%5B2%5D=1&auc_num=&okrb=&company_title=&establishment=0&industries=&period=&created_from=&created_to=&request_end_from=&request_end_to=&t%5BTrade%5D=1&t%5BeTrade%5D=1&t%5BsocialOrder%5D=1&t%5BsingleSource%5D=1&t%5BAuction%5D=1&t%5BRequest%5D=1&t%5BcontractingTrades%5D=1&t%5Bnegotiations%5D=1&t%5BOther%5D=1&r%5B1%5D=1&r%5B2%5D=2&r%5B7%5D=7&r%5B3%5D=3&r%5B4%5D=4&r%5B6%5D=6&r%5B5%5D=5&sort=num%3Adesc&sbm=1&onPage=20", 1, 5000);
         $totalStr = $data->find('.total') ? $data->find('.total')[0]->innerText() : false;
         if (! $totalStr) return false;
         $total = preg_replace("/[^,.0-9]/", '', $totalStr);
@@ -224,6 +224,6 @@ class ParseController extends Controller
         }
         $pageCount = (int) $total / 20 <= 1 ? 1 : ceil((int) $total / 20); //округление в большую сторону
         var_dump($pageCount);
-        return $this->render('test', ['data' => $data]);
+        return $this->render('test', ['data' => $data, 'pageCount' => $pageCount]);
     }
 }
