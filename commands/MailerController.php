@@ -96,8 +96,8 @@ class MailerController extends Controller
 
     protected function getPageCount($url) {
         $data = SimpleHTMLDom::file_curl_get_html($url, 1, 5000);
-        $totalStr = $data->find('.total') ? $data->find('.total')[0]->innerText() : false;
-        var_dump($totalStr);
+        $totalStr = $data->find('div[class=total]') ? $data->find('.total')[0]->innerText() : false;
+        var_dump($data->find('a[class=sel desc]'));
         if (! $totalStr) return false;
         $total = preg_replace("/[^,.0-9]/", '', $totalStr);
         if((int) $total == 0) {
